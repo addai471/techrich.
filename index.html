@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dtech Solutions · tech portfolio</title>
+    <!-- Font Awesome 6 (free) for cool icons & buttons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0b0f1a; /* deep base for alive glow */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ---------- ALIVE / ANIMATED BACKGROUND (cool tech vibe) ---------- */
+        .alive-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 30% 40%, #1a2f3f 0%, #0a0c15 80%);
+            overflow: hidden;
+        }
+
+        .alive-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                repeating-linear-gradient(0deg, rgba(0, 255, 200, 0.02) 0px, transparent 2px, transparent 8px),
+                repeating-linear-gradient(90deg, rgba(0, 200, 255, 0.03) 0px, transparent 3px, transparent 12px);
+            pointer-events: none;
+        }
+
+        .alive-bg .glow-ball {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(30, 210, 210, 0.15);
+            border-radius: 50%;
+            filter: blur(100px);
+            top: 10%;
+            left: 20%;
+            animation: floatGlow 18s infinite alternate ease-in-out;
+        }
+
+        .alive-bg .glow-ball2 {
+            width: 550px;
+            height: 550px;
+            background: rgba(180, 90, 255, 0.1);
+            bottom: 0;
+            right: 0;
+            top: auto;
+            left: auto;
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(130px);
+            animation: floatGlow2 22s infinite alternate;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+            100% { transform: translate(150px, 80px) scale(1.3); opacity: 0.7; }
+        }
+        @keyframes floatGlow2 {
+            0% { transform: translate(-30px, -20px) scale(1); opacity: 0.3; }
+            100% { transform: translate(-200px, -150px) scale(1.5); opacity: 0.6; }
+        }
+
+        /* tiny floating particles (optional) */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="1" fill="%2300ffee" opacity="0.25"/><circle cx="45" cy="30" r="1.5" fill="%23aa88ff" opacity="0.2"/><circle cx="30" cy="55" r="1" fill="%2344ccff" opacity="0.3"/><circle cx="5" cy="48" r="1.2" fill="%23ffffff" opacity="0.2"/></svg>');
+            background-repeat: repeat;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        /* main container – order & spacing */
+        .wrapper {
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+            backdrop-filter: blur(0px); /* clean glass free */
+        }
+
+        /* ---------- HEADER / BUSINESS IDENTITY ---------- */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 1rem 1rem;
+            background: rgba(12, 20, 28, 0.55);
+            backdrop-filter: blur(8px);
+            border-radius: 60px 60px 30px 30px;
+            border: 1px solid rgba(0, 255, 200, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(130deg, #a0f0ff, #b5ffd0, #ffb8f0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px #00ffe1;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            margin-top: 0.5rem;
+            background: #111a22;
+            padding: 0.5rem 2rem;
+            border-radius: 60px;
+            border: 1px solid #2cd4c7;
+            color: #c6ffff;
+            font-size: 1.3rem;
+            font-weight: 400;
+            box-shadow: 0 0 15px #00b8b0;
+        }
+
+        .hero .badge i {
+            margin-right: 10px;
+            color: #00f7d5;
+        }
+
+        .hero-location {
+            font-size: 1.4rem;
+            margin-top: 0.75rem;
+            color: #bbf0ff;
+            background: rgba(0, 30, 40, 0.7);
+            padding: 0.5rem 1.8rem;
+            display: inline-block;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ---------- cool 3D cards grid ---------- */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: rgba(18, 28, 40, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(90, 255, 210, 0.4);
+            border-radius: 40px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 255, 200, 0.2) inset;
+            transition: transform 0.25s ease, box-shadow 0.3s;
+            color: #f0faff;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 35px 55px -8px #000, 0 0 0 2px #54f5dc inset;
+            border-color: #9afff0;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -20%;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, #3affd5, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .card:hover::after {
+            opacity: 0.25;
+            transform: scale(1.5);
+        }
+
+        .card i {
+            font-size: 3rem;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(45deg, #1ee6cf, #c76eff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card h3 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            text-shadow: 0 2px 5px #00ccb1;
+        }
+
+        .card ul {
+            list-style: none;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed rgba(100, 255, 220, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 400;
+            font-size: 1.1rem;
+        }
+
+        .card li i {
+            font-size: 1.2rem;
+            margin-bottom: 0;
+            background: none;
+            color: #40e6d0;
+        }
+
+        .card .badge-tech {
+            background: rgba(0, 255, 200, 0.15);
+            border-radius: 60px;
+            padding: 0.25rem 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            border: 1px solid #31e5cb;
+        }
+
+        /* special order for the three categories – already arranged by grid */
+
+        /* ---------- PHONE & WHATSAPP BUTTONS (cool) ---------- */
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3.5rem 0 2.5rem;
+        }
+
+        .btn-wa, .btn-phone {
+            padding: 1.2rem 3rem;
+            border-radius: 80px;
+            font-size: 2rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-wa {
+            background: #1e9b4b;
+            background: linear-gradient(145deg, #1eb45d, #128C7E);
+            box-shadow: 0 0 25px #18b87e;
+        }
+
+        .btn-phone {
+            background: #0f1c2e;
+            background: linear-gradient(145deg, #204766, #0099cc);
+            box-shadow: 0 0 25px #1f9cf0;
+        }
+
+        .btn-wa:hover {
+            transform: scale(1.07);
+            background: #23c56b;
+            box-shadow: 0 0 35px #2fe09b;
+        }
+
+        .btn-phone:hover {
+            transform: scale(1.07);
+            background: #266b9c;
+            box-shadow: 0 0 35px #5fc1ff;
+        }
+
+        .btn-wa i, .btn-phone i {
+            font-size: 2.5rem;
+        }
+
+        /* ---------- PUBLIC TECH IMAGES (cool unsplash / icons) ---------- */
+        .image-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0 2rem;
+        }
+
+        .img-card {
+            width: 160px;
+            height: 160px;
+            border-radius: 45px;
+            background: #112233;
+            border: 2px solid #22ffe0;
+            box-shadow: 0 0 35px #02b5a5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .img-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(1.1);
+            mix-blend-mode: lighten;
+        }
+
+        .img-card:hover {
+            transform: rotate(2deg) scale(1.05);
+            border-color: white;
+        }
+
+        /* using free high-res tech images from unsplash (via splide) placeholder but cool */
+        .img-card[style*="background"] {
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ---------- FOOTER (super cool, with order) ---------- */
+        footer {
+            width: 100%;
+            margin-top: 4rem;
+            background: rgba(0, 15, 25, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 60px 60px 30px 30px;
+            padding: 2.5rem 2rem 2rem;
+            border: 1px solid #29e2cf30;
+            box-shadow: 0 -10px 40px rgba(0, 255, 200, 0.2);
+            color: #e6f5ff;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left h2 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #d4fff0, #a4dbff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-left p {
+            margin: 0.7rem 0 0.2rem;
+            font-size: 1.3rem;
+        }
+        .footer-left i {
+            color: #4affd5;
+            width: 2rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 2.2rem;
+            font-size: 2.5rem;
+        }
+
+        .footer-social a {
+            color: #bbfff0;
+            transition: 0.2s;
+        }
+        .footer-social a:hover {
+            color: #00ffc3;
+            text-shadow: 0 0 25px cyan;
+            transform: scale(1.2);
+        }
+
+        .footer-credit {
+            font-size: 1.2rem;
+            color: #99ced6;
+            border-left: 2px solid #2fe0cb;
+            padding-left: 2rem;
+        }
+        .footer-credit i {
+            color: #f77eff;
+        }
+
+        /* everything arranged & no missing part */
+        .number-big {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            background: #131e28;
+            padding: 0.3rem 1.8rem;
+            border-radius: 70px;
+            display: inline-block;
+            border: 1px solid #1fcab3;
+        }
+
+        hr {
+            border: 0.5px solid #44ffee30;
+            margin: 2rem 0;
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 2.8rem; }
+            .btn-wa, .btn-phone { font-size: 1.6rem; padding: 1rem 2rem; }
+            footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+            .footer-credit { border-left: none; padding-left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- alive tech background layers -->
+    <div class="alive-bg">
+        <div class="glow-ball"></div>
+        <div class="glow-ball2"></div>
+    </div>
+    <div class="particles"></div>
+
+    <div class="wrapper">
+        <!-- header with business name, location, number -->
+        <div class="hero">
+            <h1>⚡DTECH SOLUTIONS⚡</h1>
+            <div class="badge"><i class="fa-solid fa-microchip"></i> All PC faults · Hardware & Software</div>
+            <div class="hero-location"><i class="fa-solid fa-map-pin"></i> Akim Oda, Asene · <i class="fa-regular fa-clock"></i> 24/7 support</div>
+            <div class="number-big" style="margin-top: 1.5rem;"><i class="fa-solid fa-phone"></i> 0593112313</div>
+        </div>
+
+        <!-- three cool cards (exactly as description) -->
+        <div class="card-grid">
+            <!-- Card 1: PC faults -->
+            <div class="card">
+                <i class="fa-solid fa-laptop"></i>
+                <h3>PC MASTERS</h3>
+                <ul>
+                    <li><i class="fa-regular fa-window-max"></i> OS installation</li>
+                    <li><i class="fa-solid fa-virus"></i> Virus clearance</li>
+                    <li><i class="fa-solid fa-database"></i> Data recovery</li>
+                    <li><i class="fa-solid fa-gear"></i> Software installation</li>
+                    <li><i class="fa-solid fa-gamepad"></i> Games & optimizations</li>
+                </ul>
+                <div class="badge-tech"><i class="fa-regular fa-keyboard"></i> All hardware & software</div>
+            </div>
+
+            <!-- Card 2: Household/industrial appliances -->
+            <div class="card">
+                <i class="fa-solid fa-tv"></i>
+                <h3>A/V & APPLIANCES</h3>
+                <ul>
+                    <li><i class="fa-solid fa-tv"></i> TVs (LED, LCD, OLED)</li>
+                    <li><i class="fa-solid fa-music"></i> Amplifier (indoor/outdoor)</li>
+                    <li><i class="fa-brands fa-bluetooth"></i> Bluetooth devices</li>
+                    <li><i class="fa-solid fa-volume-low"></i> Woofers, soundbars</li>
+                    <li><i class="fa-solid fa-plug"></i> Industrial maintenance</li>
+                </ul>
+                <div class="badge-tech"><i class="fa-regular fa-thumbs-up"></i> Repairs & service</div>
+            </div>
+
+            <!-- Card 3: Mobile solutions -->
+            <div class="card">
+                <i class="fa-solid fa-mobile-screen"></i>
+                <h3>MOBILE CLINIC</h3>
+                <ul>
+                    <li><i class="fa-solid fa-screwdriver-wrench"></i> All phone repairs</li>
+                    <li><i class="fa-solid fa-bolt"></i> Restoration (dead phones)</li>
+                    <li><i class="fa-solid fa-battery-three-quarters"></i> Screen, battery, housing</li>
+                    <li><i class="fa-solid fa-lock-open"></i> Unlock: iPhone 5s–17PM</li>
+                    <li><i class="fa-solid fa-robot"></i> All android locks</li>
+                </ul>
+                <div class="badge-tech"><i class="fa-regular fa-gem"></i> Flex & quality</div>
+            </div>
+        </div>
+
+        <!-- PHONE & WHATSAPP BUTTONS (very cool, with number) -->
+        <div class="contact-row">
+            <a href="https://wa.me/233593112313?text=Hello%20Dtech%20Solutions%2C%20I%20need%20tech%20help!" class="btn-wa" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+            <a href="tel:+233593112313" class="btn-phone"><i class="fa-solid fa-phone-volume"></i> 0593112313</a>
+        </div>
+
+        <!-- cool public tech images (unsplash / free icons feel) -->
+        <div class="image-showcase">
+            <div class="img-card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=200&h=200&fit=crop&auto=format" alt="chip"></div>
+            <div class="img-card"><img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=200&h=200&fit=crop&auto=format" alt="pc repair"></div>
+            <div class="img-card"><img src="https://images.unsplash.com/photo-1602781917855-8d896372a19c?w=200&h=200&fit=crop&auto=format" alt="tv repair"></div>
+            <div class="img-card"><img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=200&h=200&fit=crop&auto=format" alt="phone repair"></div>
+            <div class="img-card"><img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=200&h=200&fit=crop&auto=format" alt="amplifier"></div>
+        </div>
+
+        <!-- COOL FOOTER with everything arranged -->
+        <footer>
+            <div class="footer-left">
+                <h2><i class="fa-solid fa-bolt"></i> Dtech Solutions</h2>
+                <p><i class="fa-solid fa-location-dot"></i> Akim Oda, Asene · Eastern Region</p>
+                <p><i class="fa-solid fa-phone"></i> 0593112313</p>
+                <p><i class="fa-regular fa-envelope"></i> dtech.oda@tech.gh</p>
+                <p style="margin-top: 1rem;"><i class="fa-regular fa-circle-check"></i> 24/7 · emergency repairs</p>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://wa.me/233593112313"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+            <div class="footer-credit">
+                <i class="fa-regular fa-copyright"></i> 2025 Dtech · All fixes guaranteed <br>
+                <span style="font-size: 1rem;"><i class="fa-solid fa-microchip"></i> hardware · software · innovation</span>
+            </div>
+        </footer>
+
+        <!-- tiny note: everything is ordered -->
+        <div style="text-align: center; margin: 1rem 0 0.5rem; color: #84d9d0; font-size: 1.1rem;">
+            <i class="fa-regular fa-hand-peace"></i> call, WhatsApp or visit — we solve tech
+        </div>
+    </div>
+
+    <!-- optional hover sound? no, just pure cool looks -->
+</body>
+</html>
