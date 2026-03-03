@@ -1,5 +1,3 @@
-Here is the updated HTML code with the email address changed to `quophisparrow@gmail.com` in the footer.
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -158,6 +156,22 @@ Here is the updated HTML code with the email address changed to `quophisparrow@g
             backdrop-filter: blur(4px);
         }
 
+        /* ---------- NUMBER VISIBILITY FIX (bright cyan) ---------- */
+        .number-big {
+            font-size: 2.5rem;          /* slightly bigger for impact */
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: #0b1a24;         /* dark background behind number */
+            padding: 0.6rem 2.2rem;
+            border-radius: 70px;
+            display: inline-block;
+            border: 2px solid #2affd0;    /* more vivid border */
+            color: #4affd5;                /* ✨✨ BRIGHT CYAN ✨✨ easy to read */
+            text-shadow: 0 0 15px #00ffee, 0 0 30px #0077ff; /* glow effect */
+            box-shadow: 0 0 30px #1fe0c0;
+            margin-top: 1.5rem;
+        }
+
         /* ---------- cool 3D cards grid ---------- */
         .card-grid {
             display: grid;
@@ -256,8 +270,6 @@ Here is the updated HTML code with the email address changed to `quophisparrow@g
             border: 1px solid #31e5cb;
         }
 
-        /* special order for the three categories – already arranged by grid */
-
         /* ---------- PHONE & WHATSAPP BUTTONS (cool) ---------- */
         .contact-row {
             display: flex;
@@ -349,12 +361,6 @@ Here is the updated HTML code with the email address changed to `quophisparrow@g
             border-color: white;
         }
 
-        /* using free high-res tech images from unsplash (via splide) placeholder but cool */
-        .img-card[style*="background"] {
-            background-size: cover;
-            background-position: center;
-        }
-
         /* ---------- FOOTER (super cool, with order) ---------- */
         footer {
             width: 100%;
@@ -415,18 +421,6 @@ Here is the updated HTML code with the email address changed to `quophisparrow@g
             color: #f77eff;
         }
 
-        /* everything arranged & no missing part */
-        .number-big {
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            background: #131e28;
-            padding: 0.3rem 1.8rem;
-            border-radius: 70px;
-            display: inline-block;
-            border: 1px solid #1fcab3;
-        }
-
         hr {
             border: 0.5px solid #44ffee30;
             margin: 2rem 0;
@@ -438,6 +432,7 @@ Here is the updated HTML code with the email address changed to `quophisparrow@g
             .btn-wa, .btn-phone { font-size: 1.6rem; padding: 1rem 2rem; }
             footer { flex-direction: column; gap: 1.5rem; text-align: center; }
             .footer-credit { border-left: none; padding-left: 0; }
+            .number-big { font-size: 2rem; }
         }
     </style>
 </head>
@@ -455,7 +450,8 @@ Here is the updated HTML code with the email address changed to `quophisparrow@g
             <h1>⚡DTECH SOLUTIONS⚡</h1>
             <div class="badge"><i class="fa-solid fa-microchip"></i> All PC faults · Hardware & Software</div>
             <div class="hero-location"><i class="fa-solid fa-map-pin"></i> Akim Oda, Asene · <i class="fa-regular fa-clock"></i> 24/7 support</div>
-            <div class="number-big" style="margin-top: 1.5rem;"><i class="fa-solid fa-phone"></i> 0593112313</div>
+            <!-- UPDATED NUMBER COLOR: bright cyan with glow -->
+            <div class="number-big"><i class="fa-solid fa-phone"></i> 0593112313</div>
         </div>
 
         <!-- three cool cards (exactly as description) -->
@@ -545,8 +541,5 @@ Here is the updated HTML code with the email address changed to `quophisparrow@g
             <i class="fa-regular fa-hand-peace"></i> call, WhatsApp or visit — we solve tech
         </div>
     </div>
-
-    <!-- optional hover sound? no, just pure cool looks -->
 </body>
 </html>
-```
